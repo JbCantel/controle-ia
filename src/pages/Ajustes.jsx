@@ -19,7 +19,7 @@ export default function Ajustes() {
   }, [message]);
 
   async function exportBackup() {
-    const data = { exportedAt: new Date().toISOString(), version: 1 };
+    const data = { exportedAt: new Date().toISOString(), version: db.verno };
     for (const table of ALL_TABLES) data[table] = await db.table(table).toArray();
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     const a = document.createElement('a');
@@ -37,6 +37,7 @@ export default function Ajustes() {
     reader.onload = () => {
       try {
         const data = JSON.parse(reader.result);
+        // Validação rasa de estrutura — app pessoal: confiamos no conteúdo de backups gerados aqui.
         if (!Array.isArray(data.transactions) || !Array.isArray(data.categories)) {
           throw new Error('estrutura inválida');
         }
@@ -54,8 +55,12 @@ export default function Ajustes() {
       await db.transaction('rw', ALL_TABLES.map((t) => db.table(t)), async () => {
         for (const table of ALL_TABLES) {
           await db.table(table).clear();
-          if (Array.isArray(importData[table]) && importData[table].length > 0) {
-            await db.table(table).bulkAdd(importData[table]);
+          const rows = importData[table];
+          if (Array.isArray(rows) && rows.length > 0) {
+            // habitLogs pode conter duplicatas de backups antigos (índice único só na v2):
+            // bulkPut sobrescreve em vez de abortar a importação inteira.
+            if (table === 'habitLogs') await db.table(table).bulkPut(rows);
+            else await db.table(table).bulkAdd(rows);
           }
         }
       });
@@ -71,7 +76,7 @@ export default function Ajustes() {
     } catch (err) {
       console.error('Falha ao importar backup', err);
       setImportData(null);
-      setMessage('❌ Falha ao importar. Seus dados não foram alterados.');
+      setMessage('❌ Não foi possível importar este arquivo (conteúdo inválido ou corrompido). Seus dados anteriores foram preservados.');
     }
   }
 
