@@ -22,11 +22,12 @@ export default function Modal({ open, title, onClose, children }) {
       <div
         role="dialog"
         aria-modal="true"
+        aria-labelledby="modal-title"
         className="max-h-[90vh] w-full overflow-y-auto rounded-t-2xl bg-white p-5 shadow-xl sm:max-w-md sm:rounded-2xl dark:bg-slate-800"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-semibold">{title}</h2>
+          <h2 id="modal-title" className="text-lg font-semibold">{title}</h2>
           <button
             onClick={onClose}
             aria-label="Fechar"

@@ -13,6 +13,11 @@ export default function Categorias() {
   const [toDelete, setToDelete] = useState(null);
   const [error, setError] = useState('');
 
+  function closeForm() {
+    setForm(null);
+    setError('');
+  }
+
   async function save(e) {
     e.preventDefault();
     const name = form.name.trim();
@@ -22,8 +27,7 @@ export default function Categorias() {
     } else {
       await db.categories.add({ name, type: form.type, icon: form.icon, color: form.color });
     }
-    setForm(null);
-    setError('');
+    closeForm();
   }
 
   // Excluir: transações órfãs vão para "Outros" (criada se não existir). Histórico nunca se perde.
@@ -37,7 +41,7 @@ export default function Categorias() {
           .filter((c) => c.name === 'Outros')
           .first();
         if (!outros) {
-          const id = await db.categories.add({ name: 'Outros', type: cat.type, icon: '📦', color: '#94a3b8' });
+          const id = await db.categories.add({ name: 'Outros', type: cat.type, icon: '📦', color: '#94a3b8', system: true });
           outros = { id };
         }
         await db.transactions.where('categoryId').equals(cat.id).modify({ categoryId: outros.id });
@@ -81,14 +85,16 @@ export default function Categorias() {
                 <span className="flex-1 font-medium">{cat.name}</span>
                 <button
                   onClick={() => setForm({ ...cat })}
-                  className="rounded-lg px-2 py-1 text-sm text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-700"
+                  disabled={!!cat.system}
+                  title={cat.system ? 'Categoria padrão, não pode ser editada' : undefined}
+                  className="rounded-lg px-2 py-1 text-sm text-slate-500 hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-30 dark:hover:bg-slate-700"
                 >
                   Editar
                 </button>
                 <button
                   onClick={() => setToDelete(cat)}
-                  disabled={cat.name === 'Outros'}
-                  title={cat.name === 'Outros' ? 'Categoria padrão, não pode ser excluída' : undefined}
+                  disabled={!!cat.system}
+                  title={cat.system ? 'Categoria padrão, não pode ser excluída' : undefined}
                   className="rounded-lg px-2 py-1 text-sm text-red-500 hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-30 dark:hover:bg-red-900/30"
                 >
                   Excluir
@@ -99,7 +105,7 @@ export default function Categorias() {
         </Card>
       ))}
 
-      <Modal open={form !== null} title={form?.id ? 'Editar categoria' : 'Nova categoria'} onClose={() => setForm(null)}>
+      <Modal open={form !== null} title={form?.id ? 'Editar categoria' : 'Nova categoria'} onClose={closeForm}>
         {form && (
           <form onSubmit={save} className="space-y-3">
             <label className="block text-sm font-medium">
