@@ -10,7 +10,7 @@ export default function MonthPicker({ month, onChange }) {
       >
         ◀
       </button>
-      <span className="min-w-36 text-center text-sm font-semibold capitalize">{monthLabel(month)}</span>
+      <span className="inline-block min-w-36 text-center text-sm font-semibold first-letter:uppercase">{monthLabel(month)}</span>
       <button
         onClick={() => onChange(addMonths(month, 1))}
         aria-label="Próximo mês"
