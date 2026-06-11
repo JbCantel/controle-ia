@@ -1,4 +1,5 @@
 import Dexie from 'dexie';
+import { seedDatabase } from './seed';
 
 export const db = new Dexie('controle-pessoal');
 
@@ -21,3 +22,5 @@ export const ALL_TABLES = [
   'transactions', 'categories', 'budgets', 'goals',
   'contributions', 'habits', 'habitLogs', 'settings',
 ];
+
+db.on('populate', (tx) => seedDatabase(tx));
