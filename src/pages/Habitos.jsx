@@ -10,6 +10,43 @@ import { isExpectedOn, currentStreak, bestStreak } from '../utils/streaks';
 const WEEKDAYS = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
 const NEW_FORM = { name: '', icon: '✅', color: '#6366f1', freqMode: 'daily', weekdays: [] };
 
+function MonthCalendar({ habit, logSet, month, today, onToggle }) {
+  const total = daysInMonth(month);
+  const offset = weekdayOf(`${month}-01`);
+  const cells = [
+    ...Array.from({ length: offset }, () => null),
+    ...Array.from({ length: total }, (_, i) => `${month}-${String(i + 1).padStart(2, '0')}`),
+  ];
+  return (
+    <div className="mt-3 grid grid-cols-7 gap-1 text-center">
+      {WEEKDAYS.map((w, i) => (
+        <span key={i} className="text-[10px] font-semibold text-slate-400">{w}</span>
+      ))}
+      {cells.map((iso, i) => {
+        if (!iso) return <span key={`v-${i}`} />;
+        const done = logSet.has(iso);
+        const expected = isExpectedOn(habit, iso) && iso <= today;
+        return (
+          <button
+            key={iso}
+            onClick={() => onToggle(habit, iso)}
+            disabled={iso > today}
+            aria-label={`Dia ${iso.slice(8)}`}
+            className={`mx-auto flex h-7 w-7 items-center justify-center rounded-full text-[11px] transition
+              ${done ? 'font-bold text-white' : ''}
+              ${!done && expected ? 'border-2 border-dashed border-slate-300 text-slate-400 dark:border-slate-600' : ''}
+              ${!done && !expected ? 'text-slate-300 dark:text-slate-600' : ''}
+              ${iso > today ? 'cursor-default opacity-40' : 'hover:scale-110'}`}
+            style={done ? { backgroundColor: habit.color } : undefined}
+          >
+            {Number(iso.slice(8))}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function Habitos() {
   const [form, setForm] = useState(null);
   const [toDelete, setToDelete] = useState(null);
@@ -33,7 +70,13 @@ export default function Habitos() {
     if (iso > today) return; // não marcar o futuro
     const existing = await db.habitLogs.where('[habitId+date]').equals([habit.id, iso]).first();
     if (existing) await db.habitLogs.delete(existing.id);
-    else await db.habitLogs.add({ habitId: habit.id, date: iso });
+    else {
+      try {
+        await db.habitLogs.add({ habitId: habit.id, date: iso });
+      } catch (e) {
+        if (e.name !== 'ConstraintError') throw e; // duplo clique: registro já existe
+      }
+    }
   }
 
   async function save(e) {
@@ -72,44 +115,6 @@ export default function Habitos() {
       freqMode: habit.frequency === 'daily' ? 'daily' : 'weekdays',
       weekdays: habit.frequency === 'daily' ? [] : habit.frequency,
     });
-  }
-
-  // Calendário do mês atual: células alinhadas pelo dia da semana
-  function MonthCalendar({ habit, logSet }) {
-    const total = daysInMonth(month);
-    const offset = weekdayOf(`${month}-01`);
-    const cells = [
-      ...Array.from({ length: offset }, () => null),
-      ...Array.from({ length: total }, (_, i) => `${month}-${String(i + 1).padStart(2, '0')}`),
-    ];
-    return (
-      <div className="mt-3 grid grid-cols-7 gap-1 text-center">
-        {WEEKDAYS.map((w, i) => (
-          <span key={i} className="text-[10px] font-semibold text-slate-400">{w}</span>
-        ))}
-        {cells.map((iso, i) => {
-          if (!iso) return <span key={`v-${i}`} />;
-          const done = logSet.has(iso);
-          const expected = isExpectedOn(habit, iso) && iso <= today;
-          return (
-            <button
-              key={iso}
-              onClick={() => toggle(habit, iso)}
-              disabled={iso > today}
-              aria-label={`Dia ${iso.slice(8)}`}
-              className={`mx-auto flex h-7 w-7 items-center justify-center rounded-full text-[11px] transition
-                ${done ? 'font-bold text-white' : ''}
-                ${!done && expected ? 'border-2 border-dashed border-slate-300 text-slate-400 dark:border-slate-600' : ''}
-                ${!done && !expected ? 'text-slate-300 dark:text-slate-600' : ''}
-                ${iso > today ? 'cursor-default opacity-40' : 'hover:scale-110'}`}
-              style={done ? { backgroundColor: habit.color } : undefined}
-            >
-              {Number(iso.slice(8))}
-            </button>
-          );
-        })}
-      </div>
-    );
   }
 
   return (
@@ -166,7 +171,7 @@ export default function Habitos() {
                 {doneToday ? '✓ Feito hoje!' : expectedToday ? 'Marcar como feito hoje' : 'Hoje é dia de descanso 😴'}
               </button>
 
-              <MonthCalendar habit={habit} logSet={logSet} />
+              <MonthCalendar habit={habit} logSet={logSet} month={month} today={today} onToggle={toggle} />
             </Card>
           );
         })}

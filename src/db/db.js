@@ -13,6 +13,10 @@ db.version(1).stores({
   settings: 'key',
 });
 
+db.version(2).stores({
+  habitLogs: '++id, habitId, date, &[habitId+date]',
+});
+
 export const ALL_TABLES = [
   'transactions', 'categories', 'budgets', 'goals',
   'contributions', 'habits', 'habitLogs', 'settings',

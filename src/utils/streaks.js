@@ -32,7 +32,7 @@ export function bestStreak(habit, logSet, today) {
       if (logSet.has(day)) {
         run++;
         if (run > best) best = run;
-      } else if (day !== today) {
+      } else if (day !== today) { // hoje sem marcação ainda não é falha
         run = 0;
       }
     }
