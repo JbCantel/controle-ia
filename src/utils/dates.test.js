@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { formatDateBR, monthKey, addMonths, addDays, weekdayOf, lastNMonths, monthLabel, daysInMonth } from './dates';
+import { formatDateBR, monthKey, addMonths, addDays, weekdayOf, lastNMonths, monthLabel, monthShort, daysInMonth, currentMonthKey } from './dates';
 
 describe('dates', () => {
   it('formata ISO em dd/mm/aaaa', () => {
@@ -25,6 +25,11 @@ describe('dates', () => {
     const months = lastNMonths(6);
     expect(months).toHaveLength(6);
     expect(months[5]).toMatch(/^\d{4}-\d{2}$/);
+    expect(months[5]).toBe(currentMonthKey());
+    expect(months[0]).toBe(addMonths(currentMonthKey(), -5));
+  });
+  it('abreviacao do mes em pt-BR', () => {
+    expect(monthShort('2026-06')).toBe('jun.');
   });
   it('rótulo do mês em pt-BR', () => {
     expect(monthLabel('2026-06')).toBe('junho de 2026');
