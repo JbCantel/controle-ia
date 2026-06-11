@@ -175,7 +175,7 @@ export default function Dashboard() {
             <BarChart data={barData}>
               <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.3} />
               <XAxis dataKey="name" fontSize={12} />
-              <YAxis fontSize={11} tickFormatter={(v) => `${Math.round(v / 1000)}k`} width={32} />
+              <YAxis fontSize={11} tickFormatter={(v) => (Math.abs(v) >= 1000 ? `${Math.round(v / 1000)}k` : String(Math.round(v)))} width={32} />
               <Tooltip formatter={tooltipFmt} />
               <Legend />
               <Bar dataKey="Receitas" fill="#10b981" radius={[6, 6, 0, 0]} />
@@ -192,7 +192,7 @@ export default function Dashboard() {
             <LineChart data={lineData}>
               <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.3} />
               <XAxis dataKey="name" fontSize={12} />
-              <YAxis fontSize={11} tickFormatter={(v) => `${Math.round(v / 1000)}k`} width={32} />
+              <YAxis fontSize={11} tickFormatter={(v) => (Math.abs(v) >= 1000 ? `${Math.round(v / 1000)}k` : String(Math.round(v)))} width={32} />
               <Tooltip formatter={tooltipFmt} />
               <Line type="monotone" dataKey="Saldo" stroke="#6366f1" strokeWidth={2.5} dot={{ r: 4 }} />
             </LineChart>

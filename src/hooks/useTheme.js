@@ -13,6 +13,7 @@ export function useTheme() {
   }, [theme]);
 
   async function setTheme(value) {
+    localStorage.setItem('theme', value);
     await db.settings.put({ key: 'theme', value });
   }
 
