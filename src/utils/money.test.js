@@ -28,4 +28,11 @@ describe('parseBRL', () => {
     expect(parseBRL('')).toBeNaN();
     expect(parseBRL(null)).toBeNaN();
   });
+  it('rejeita decimal no estilo americano (ponto como decimal)', () => {
+    expect(parseBRL('10.50')).toBeNaN();
+    expect(parseBRL('1.5')).toBeNaN();
+  });
+  it('aceita milhar brasileiro sem decimal', () => {
+    expect(parseBRL('1.050')).toBe(105000);
+  });
 });

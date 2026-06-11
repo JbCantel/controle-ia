@@ -46,6 +46,7 @@ export default function Transacoes() {
     e.preventDefault();
     const amount = parseBRL(form.amountStr);
     if (isNaN(amount) || amount <= 0) return setError('Informe um valor válido, maior que zero.');
+    if (!form.date) return setError('Informe uma data válida.');
     if (!form.categoryId) return setError('Escolha uma categoria.');
     if (!form.description.trim()) return setError('Descreva a transação.');
     const data = {
@@ -181,6 +182,7 @@ export default function Transacoes() {
             <label className="block text-sm font-medium">
               Data
               <input type="date" value={form.date} onChange={(e) => setForm({ ...form, date: e.target.value })}
+                required
                 className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 dark:border-slate-600 dark:bg-slate-900" />
             </label>
             <label className="block text-sm font-medium">
@@ -208,7 +210,10 @@ export default function Transacoes() {
       <ConfirmDialog
         open={toDelete !== null}
         message={`Excluir "${toDelete?.description}" (${toDelete ? formatBRL(toDelete.amount) : ''})?`}
-        onConfirm={async () => { await db.transactions.delete(toDelete.id); setToDelete(null); }}
+        onConfirm={async () => {
+          try { await db.transactions.delete(toDelete.id); }
+          finally { setToDelete(null); }
+        }}
         onCancel={() => setToDelete(null)}
       />
     </div>
