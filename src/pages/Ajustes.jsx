@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { db, ALL_TABLES } from '../db/db';
 import Card from '../components/Card';
 import ConfirmDialog from '../components/ConfirmDialog';
@@ -11,6 +11,12 @@ export default function Ajustes() {
   const [importData, setImportData] = useState(null);
   const [resetStep, setResetStep] = useState(0); // 0=nada, 1=primeira confirmação, 2=segunda
   const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    if (!message) return;
+    const t = setTimeout(() => setMessage(''), 6000);
+    return () => clearTimeout(t);
+  }, [message]);
 
   async function exportBackup() {
     const data = { exportedAt: new Date().toISOString(), version: 1 };
@@ -44,33 +50,45 @@ export default function Ajustes() {
   }
 
   async function doImport() {
-    await db.transaction('rw', ALL_TABLES.map((t) => db.table(t)), async () => {
-      for (const table of ALL_TABLES) {
-        await db.table(table).clear();
-        if (Array.isArray(importData[table]) && importData[table].length > 0) {
-          await db.table(table).bulkAdd(importData[table]);
+    try {
+      await db.transaction('rw', ALL_TABLES.map((t) => db.table(t)), async () => {
+        for (const table of ALL_TABLES) {
+          await db.table(table).clear();
+          if (Array.isArray(importData[table]) && importData[table].length > 0) {
+            await db.table(table).bulkAdd(importData[table]);
+          }
         }
+      });
+      // Amendment A: keep localStorage theme consistent with imported settings
+      const importedTheme = importData?.settings?.find?.((s) => s.key === 'theme')?.value;
+      if (importedTheme) {
+        localStorage.setItem('theme', importedTheme);
+      } else {
+        localStorage.removeItem('theme');
       }
-    });
-    // Amendment A: keep localStorage theme consistent with imported settings
-    const importedTheme = importData?.settings?.find?.((s) => s.key === 'theme')?.value;
-    if (importedTheme) {
-      localStorage.setItem('theme', importedTheme);
-    } else {
-      localStorage.removeItem('theme');
+      setImportData(null);
+      setMessage('Backup importado com sucesso! ✅');
+    } catch (err) {
+      console.error('Falha ao importar backup', err);
+      setImportData(null);
+      setMessage('❌ Falha ao importar. Seus dados não foram alterados.');
     }
-    setImportData(null);
-    setMessage('Backup importado com sucesso! ✅');
   }
 
   async function doReset() {
-    await db.transaction('rw', ALL_TABLES.map((t) => db.table(t)), async () => {
-      for (const table of ALL_TABLES) await db.table(table).clear();
-    });
-    // Amendment A: remove theme from localStorage so it follows system preference
-    localStorage.removeItem('theme');
-    setResetStep(0);
-    setMessage('Todos os dados foram apagados. Começando do zero. 🧹');
+    try {
+      await db.transaction('rw', ALL_TABLES.map((t) => db.table(t)), async () => {
+        for (const table of ALL_TABLES) await db.table(table).clear();
+      });
+      // Amendment A: remove theme from localStorage so it follows system preference
+      localStorage.removeItem('theme');
+      setMessage('Todos os dados foram apagados. Começando do zero. 🧹');
+    } catch (err) {
+      console.error('Falha ao zerar dados', err);
+      setMessage('❌ Falha ao zerar os dados.');
+    } finally {
+      setResetStep(0);
+    }
   }
 
   return (
