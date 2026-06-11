@@ -5,7 +5,7 @@ import Card from '../components/Card';
 import Modal from '../components/Modal';
 import ConfirmDialog from '../components/ConfirmDialog';
 import ProgressBar from '../components/ProgressBar';
-import { formatBRL, parseBRL } from '../utils/money';
+import { formatBRL, parseBRL, centsToBRLInput } from '../utils/money';
 import { todayISO, formatDateBR } from '../utils/dates';
 
 export default function Metas() {
@@ -63,6 +63,7 @@ export default function Metas() {
         await db.contributions.where('goalId').equals(toDelete.id).delete();
         await db.goals.delete(toDelete.id);
       });
+      if (expanded === toDelete.id) setExpanded(null);
     } finally {
       setToDelete(null);
     }
@@ -85,12 +86,10 @@ export default function Metas() {
       )}
 
       {goals.map((goal) => {
-        const list = (contribsByGoal[goal.id] ?? []).sort((a, b) => b.date.localeCompare(a.date));
+        const list = [...(contribsByGoal[goal.id] ?? [])].sort((a, b) => b.date.localeCompare(a.date));
         const total = list.reduce((s, c) => s + c.amount, 0);
-        // Self-review: pct calc Math.round((total / goal.targetAmount) * 100)
-        const pct = Math.round((total / goal.targetAmount) * 100);
-        // Self-review: done state total >= goal.targetAmount
-        const done = total >= goal.targetAmount;
+        const pct = goal.targetAmount > 0 ? Math.round((total / goal.targetAmount) * 100) : 0;
+        const done = goal.targetAmount > 0 && total >= goal.targetAmount;
         return (
           <Card key={goal.id} className={done ? 'ring-2 ring-emerald-500' : ''}>
             <div className="flex items-start justify-between gap-2">
@@ -102,7 +101,7 @@ export default function Metas() {
                 </p>
               </div>
               <div className="flex gap-1">
-                <button onClick={() => setGoalForm({ id: goal.id, name: goal.name, targetStr: (goal.targetAmount / 100).toFixed(2).replace('.', ',') })}
+                <button onClick={() => setGoalForm({ id: goal.id, name: goal.name, targetStr: centsToBRLInput(goal.targetAmount) })}
                   aria-label="Editar" className="rounded-lg px-2 py-1 text-sm text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700">✏️</button>
                 <button onClick={() => setToDelete({ ...goal, total })}
                   aria-label="Excluir" className="rounded-lg px-2 py-1 text-sm text-slate-400 hover:bg-red-50 dark:hover:bg-red-900/30">🗑️</button>

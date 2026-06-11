@@ -7,6 +7,11 @@ export function formatBRL(cents) {
   return str.replace(/\u00a0/g, ' ').replace(/\u2212/g, '-');
 }
 
+// Converte centavos para o texto de um input de valor ("1234,56"). Inverso de parseBRL.
+export function centsToBRLInput(cents) {
+  return (cents / 100).toFixed(2).replace('.', ',');
+}
+
 export function parseBRL(input) {
   // parseBRL espera formato pt-BR (ponto = milhar, virgula = decimal).
   if (typeof input !== 'string') return NaN;

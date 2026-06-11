@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { formatBRL, parseBRL } from './money';
+import { formatBRL, parseBRL, centsToBRLInput } from './money';
 
 describe('formatBRL', () => {
   it('formata centavos em R$ com vírgula e milhar', () => {
@@ -34,5 +34,14 @@ describe('parseBRL', () => {
   });
   it('aceita milhar brasileiro sem decimal', () => {
     expect(parseBRL('1.050')).toBe(105000);
+  });
+});
+
+describe('centsToBRLInput', () => {
+  it('converte centavos para texto de input com vírgula', () => {
+    expect(centsToBRLInput(123456)).toBe('1234,56');
+  });
+  it('roundtrip com parseBRL', () => {
+    expect(parseBRL(centsToBRLInput(123456))).toBe(123456);
   });
 });

@@ -5,7 +5,7 @@ import Card from '../components/Card';
 import Modal from '../components/Modal';
 import ConfirmDialog from '../components/ConfirmDialog';
 import MonthPicker from '../components/MonthPicker';
-import { formatBRL, parseBRL } from '../utils/money';
+import { formatBRL, parseBRL, centsToBRLInput } from '../utils/money';
 import { todayISO, formatDateBR, currentMonthKey } from '../utils/dates';
 
 const newTx = () => ({ type: 'despesa', amountStr: '', date: todayISO(), categoryId: '', description: '' });
@@ -65,7 +65,7 @@ export default function Transacoes() {
     setForm({
       id: tx.id,
       type: tx.type,
-      amountStr: (tx.amount / 100).toFixed(2).replace('.', ','),
+      amountStr: centsToBRLInput(tx.amount),
       date: tx.date,
       categoryId: String(tx.categoryId),
       description: tx.description,

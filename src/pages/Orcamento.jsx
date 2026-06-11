@@ -5,7 +5,7 @@ import Card from '../components/Card';
 import Modal from '../components/Modal';
 import MonthPicker from '../components/MonthPicker';
 import ProgressBar from '../components/ProgressBar';
-import { formatBRL, parseBRL } from '../utils/money';
+import { formatBRL, parseBRL, centsToBRLInput } from '../utils/money';
 import { currentMonthKey } from '../utils/dates';
 
 export default function Orcamento() {
@@ -88,7 +88,7 @@ export default function Orcamento() {
                 <button
                   onClick={() => setEditing({
                     category: cat,
-                    limitStr: budget ? (budget.monthlyLimit / 100).toFixed(2).replace('.', ',') : '',
+                    limitStr: budget ? centsToBRLInput(budget.monthlyLimit) : '',
                   })}
                   className="rounded-lg px-3 py-1.5 text-sm font-medium text-indigo-600 hover:bg-indigo-50 dark:text-indigo-400 dark:hover:bg-indigo-900/30">
                   {budget ? 'Editar' : 'Definir'}
@@ -97,8 +97,7 @@ export default function Orcamento() {
               {budget && (
                 <div className="mt-3">
                   <ProgressBar value={spent} max={budget.monthlyLimit} />
-                  {/* Self-review: pct calc Math.round((spent / budget.monthlyLimit) * 100) */}
-                  <p className="mt-1 text-right text-xs text-slate-500 dark:text-slate-400">
+                  <p className={`mt-1 text-right text-xs ${over ? 'font-semibold text-red-500' : 'text-slate-500 dark:text-slate-400'}`}>
                     {Math.round((spent / budget.monthlyLimit) * 100)}%
                   </p>
                 </div>
