@@ -1,4 +1,15 @@
+import { useEffect } from 'react';
+
 export default function Modal({ open, title, onClose, children }) {
+  useEffect(() => {
+    if (!open) return;
+    function handleKeyDown(e) {
+      if (e.key === 'Escape') onClose();
+    }
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [open, onClose]);
+
   if (!open) return null;
   return (
     <div
@@ -6,6 +17,8 @@ export default function Modal({ open, title, onClose, children }) {
       onClick={onClose}
     >
       <div
+        role="dialog"
+        aria-modal="true"
         className="max-h-[90vh] w-full overflow-y-auto rounded-t-2xl bg-white p-5 shadow-xl sm:max-w-md sm:rounded-2xl dark:bg-slate-800"
         onClick={(e) => e.stopPropagation()}
       >
