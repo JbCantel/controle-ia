@@ -10,11 +10,14 @@ const TONES = {
 export default function StatCard({ icon: Icon, tone, label, value, caption, valueTone }) {
   return (
     <Card className="@container flex flex-col rounded-kpi p-5 sm:p-6">
-      <span className={`flex h-9 w-9 items-center justify-center rounded-full ring-1 ${TONES[tone]}`}>
-        <Icon size={18} strokeWidth={1.9} aria-hidden />
-      </span>
-      <p className="mt-4 text-sm text-ink-2">{label}</p>
-      <p className={`mt-1.5 whitespace-nowrap text-[26px] font-bold leading-tight tracking-[-0.01em] tabular-nums @[16rem]:text-[30px] ${valueTone === 'expense' ? 'text-expense' : 'text-ink'}`}>
+      {/* Como na foto: emblema na mesma linha do rótulo. */}
+      <div className="flex items-center gap-3">
+        <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full ring-1 ${TONES[tone]}`}>
+          <Icon size={18} strokeWidth={1.9} aria-hidden />
+        </span>
+        <p className="text-sm text-ink-2">{label}</p>
+      </div>
+      <p className={`mt-4 whitespace-nowrap text-[26px] font-bold leading-tight tracking-[-0.01em] tabular-nums @[16rem]:text-[30px] ${valueTone === 'expense' ? 'text-expense' : 'text-ink'}`}>
         {value}
       </p>
       <p className="mt-1.5 text-[13px] text-ink-3">{caption}</p>

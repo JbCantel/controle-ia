@@ -85,7 +85,7 @@ export default function Painel() {
               action={(
                 <Link
                   to={month === currentMonthKey() ? '/transacoes' : `/transacoes?mes=${month}`}
-                  className="inline-flex h-9 items-center gap-1.5 rounded-full px-3 text-[13px] font-medium text-brand transition-colors duration-150 hover:bg-brand/10"
+                  className="inline-flex h-9 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-3 text-[13px] font-medium text-brand transition-colors duration-150 hover:bg-brand/10"
                 >
                   Ver todas<ArrowRight size={14} aria-hidden />
                 </Link>
