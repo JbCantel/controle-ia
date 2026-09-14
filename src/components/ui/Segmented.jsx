@@ -1,6 +1,6 @@
 export default function Segmented({ label, options, value, onChange }) {
   return (
-    <div role="radiogroup" aria-label={label} className="inline-flex rounded-full border border-line bg-bg p-1">
+    <div role="radiogroup" aria-label={label} className="inline-flex rounded-full border border-line bg-surface-2 p-1">
       {options.map((option) => {
         const active = option.value === value;
         return (
@@ -10,7 +10,7 @@ export default function Segmented({ label, options, value, onChange }) {
             role="radio"
             aria-checked={active}
             onClick={() => onChange(option.value)}
-            className={`h-8 rounded-full px-3 text-xs font-medium transition-colors duration-150 ${active ? 'bg-brand-soft text-ink ring-1 ring-brand-line' : 'text-ink-2 hover:text-ink'}`}
+            className={`h-9 rounded-full px-3.5 text-[13px] font-medium transition-colors duration-150 ${active ? 'bg-brand-soft text-ink ring-1 ring-brand-line' : 'text-ink-2 hover:text-ink'}`}
           >
             {option.label}
           </button>

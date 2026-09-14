@@ -7,8 +7,8 @@ export default function Brand() {
         <CircleDollarSign size={18} strokeWidth={1.75} aria-hidden />
       </span>
       <div className="leading-tight">
-        <p className="text-[15px] font-semibold tracking-wide text-ink">ORBE</p>
-        <p className="text-[11px] text-ink-3">Finanças pessoais</p>
+        <p className="text-base font-bold tracking-[0.06em] text-ink">ORBE</p>
+        <p className="text-xs text-ink-3">Finanças pessoais</p>
       </div>
     </div>
   );

@@ -26,12 +26,12 @@ const TYPE_FILTERS = [{ value: 'todas', label: 'Todas' }, { value: 'receita', la
 // Um cartão só: 3 colunas quando o espaço permite, linhas compactas quando estreito (celular, tablet com menu).
 function Totals({ items }) {
   return (
-    <Card className="@container mt-8 rounded-kpi">
+    <Card className="@container mt-10 rounded-kpi">
       <dl className="grid divide-y divide-line @xl:grid-cols-3 @xl:divide-x @xl:divide-y-0">
         {items.map(({ label, cents, tone }) => (
-          <div key={label} className="flex items-baseline justify-between gap-3 px-4 py-3 @xl:block @xl:py-4">
-            <dt className="text-[13px] text-ink-2">{label}</dt>
-            <dd className={`whitespace-nowrap text-lg font-semibold tabular-nums @xl:mt-1 @xl:text-xl ${tone}`}>{formatBRL(cents)}</dd>
+          <div key={label} className="flex items-baseline justify-between gap-3 px-5 py-3.5 @xl:block @xl:px-6 @xl:py-5">
+            <dt className="text-sm text-ink-2">{label}</dt>
+            <dd className={`whitespace-nowrap text-xl font-bold tabular-nums @xl:mt-1.5 @xl:text-[26px] ${tone}`}>{formatBRL(cents)}</dd>
           </div>
         ))}
       </dl>
@@ -89,7 +89,7 @@ export default function Transacoes() {
         ]}
       />
 
-      <Card className="mt-4 p-4 sm:p-5">
+      <Card className="mt-5 p-5 sm:p-6">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
           <Segmented label="Filtrar por tipo" options={TYPE_FILTERS} value={type} onChange={(value) => { setType(value); setCategoryId(null); }} />
           <select aria-label="Filtrar por categoria" className={`${inputClass} lg:w-52`} value={categoryId ?? ''} onChange={(e) => setCategoryId(e.target.value ? Number(e.target.value) : null)}>
@@ -113,7 +113,7 @@ export default function Transacoes() {
         </div>
       </Card>
 
-      <Card className="mt-4 p-5">
+      <Card className="mt-5 p-5 sm:p-6">
         <CardTitle title="Recorrências" subtitle="Lançadas automaticamente todo mês" />
         <div className="mt-3">
           {rules && rules.length > 0

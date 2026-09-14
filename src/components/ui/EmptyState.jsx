@@ -6,8 +6,8 @@ export default function EmptyState({ icon: Icon, title, text, action }) {
           <Icon size={22} strokeWidth={1.75} aria-hidden />
         </span>
       )}
-      <p className="font-serif text-xl text-ink">{title}</p>
-      {text && <p className="mt-1 max-w-sm text-sm text-ink-2">{text}</p>}
+      <p className="font-serif text-2xl font-semibold text-ink">{title}</p>
+      {text && <p className="mt-2 max-w-sm text-[15px] text-ink-2">{text}</p>}
       {action && <div className="mt-5">{action}</div>}
     </div>
   );

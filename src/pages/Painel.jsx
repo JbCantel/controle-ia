@@ -21,7 +21,7 @@ export default function Painel() {
     <>
       <PageHeader title="Visão geral" subtitle="Seu dinheiro, com contexto." />
       {isEmpty ? (
-        <Card className="mt-8 p-6">
+        <Card className="mt-10 p-6">
           <CardTitle title="Bem-vindo ao ORBE" subtitle="Seus dados ficam só neste navegador." />
           <p className="mt-4 max-w-prose text-sm text-ink-2">Traga um backup exportado antes ou comece do zero com as categorias padrão.</p>
           <div className="mt-6 flex flex-wrap gap-2">
@@ -30,7 +30,7 @@ export default function Painel() {
           </div>
         </Card>
       ) : (
-        <Card className="mt-8 min-h-[240px]">
+        <Card className="mt-10 min-h-[240px]">
           {counts && <EmptyState icon={LayoutGrid} title="Painel em construção" text="Os indicadores e gráficos chegam na etapa 7. Suas transações já estão na aba Transações." />}
         </Card>
       )}

@@ -6,7 +6,7 @@ const VARIANTS = {
 };
 
 export default function Button({ variant = 'secondary', size = 'md', className = '', type = 'button', ...props }) {
-  const sizing = size === 'sm' ? 'h-8 px-3 text-xs' : 'h-10 px-4 text-sm';
+  const sizing = size === 'sm' ? 'h-9 px-3.5 text-[13px]' : 'h-11 px-5 text-[15px]';
   return (
     <button
       type={type}
@@ -22,7 +22,7 @@ export function IconButton({ label, className = '', children, ...props }) {
       type="button"
       aria-label={label}
       title={label}
-      className={`inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-ink-2 transition-colors duration-150 hover:bg-line hover:text-ink ${className}`}
+      className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-ink-2 transition-colors duration-150 hover:bg-line hover:text-ink ${className}`}
       {...props}
     >
       {children}

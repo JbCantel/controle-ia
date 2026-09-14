@@ -10,8 +10,8 @@ export function CardTitle({ title, subtitle, action }) {
   return (
     <div className="flex items-start justify-between gap-3">
       <div>
-        <h2 className="font-serif text-[22px] leading-tight text-ink">{title}</h2>
-        {subtitle && <p className="mt-0.5 text-xs text-ink-3">{subtitle}</p>}
+        <h2 className="font-serif text-xl font-semibold leading-tight tracking-[-0.01em] text-ink">{title}</h2>
+        {subtitle && <p className="mt-1 text-[13px] text-ink-3">{subtitle}</p>}
       </div>
       {action}
     </div>

@@ -19,7 +19,7 @@ export default function App() {
       <Sidebar />
       <div className="min-w-0 flex-1">
         <MobileTopBar />
-        <main className="mx-auto w-full max-w-[1240px] px-4 pb-28 pt-6 md:px-10 md:pb-12 md:pt-10">
+        <main className="mx-auto w-full max-w-[1240px] px-4 pb-28 pt-8 md:px-10 md:pb-14 md:pt-12">
           <Suspense fallback={<div className="min-h-[60vh]" aria-busy="true" />}>
             <Routes>
               <Route path="/" element={<Painel />} />

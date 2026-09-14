@@ -3,26 +3,27 @@
 /* Tokens do ORBE. Nenhuma cor literal fora deste bloco (exceto cores de categoria, que são dados). */
 @theme {
   --color-*: initial;
-  --color-bg: #080B0A;
-  --color-surface: #0F1513;
-  --color-line: rgb(255 255 255 / 0.07);
-  --color-brand: #45C98A;
-  --color-brand-soft: #12241C;
-  --color-brand-line: #1E4634;
-  --color-ink: #E9EFEB;
-  --color-ink-2: #7E8C87;
-  --color-ink-3: #74817C;
-  --color-deco: #5A6662;
-  --color-expense: #E06B5A;
-  --color-income: #4CC3B5;
-  --color-amber: #E8B04B;
+  --color-bg: #070A09;
+  --color-surface: #121A17;
+  --color-surface-2: #18221E;
+  --color-line: rgb(255 255 255 / 0.10);
+  --color-brand: #4FD69A;
+  --color-brand-soft: #143324;
+  --color-brand-line: #2B6C4D;
+  --color-ink: #F1F5F3;
+  --color-ink-2: #A6B3AE;
+  --color-ink-3: #8B9994;
+  --color-deco: #4A5652;
+  --color-expense: #F07C69;
+  --color-income: #5BD3C4;
+  --color-amber: #F2BF59;
   --color-chart-purple: #A78BFA;
   --color-chart-orange: #F0A44C;
   --color-chart-cyan: #6FCFD8;
   --color-chart-pink: #F0728F;
   --color-sleep: #8CB8FF;
 
-  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-serif: "Fraunces Variable", ui-serif, Georgia, serif;
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
 
   --radius-card: 16px;
@@ -31,7 +32,7 @@
 
 @layer base {
   html { color-scheme: dark; }
-  body { @apply bg-bg font-sans text-ink antialiased; }
+  body { @apply bg-bg font-sans text-[15px] text-ink antialiased; }
   :focus-visible { outline: 2px solid var(--color-brand); outline-offset: 2px; }
   ::selection { background: var(--color-brand-line); }
 }

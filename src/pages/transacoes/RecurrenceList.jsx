@@ -7,15 +7,15 @@ export default function RecurrenceList({ rules, categoriesById, onEdit, onToggle
   return (
     <ul>
       {rules.map((rule) => {
-        const valueClass = `shrink-0 text-sm font-medium tabular-nums ${rule.type === 'receita' ? 'text-brand' : 'text-expense'} ${rule.active ? '' : 'opacity-60'}`;
+        const valueClass = `shrink-0 text-[15px] font-semibold tabular-nums ${rule.type === 'receita' ? 'text-brand' : 'text-expense'} ${rule.active ? '' : 'opacity-60'}`;
         return (
-          <li key={rule.id} className="flex items-center gap-3 border-t border-line py-3 first:border-t-0">
+          <li key={rule.id} className="flex items-center gap-3 border-t border-line py-3.5 first:border-t-0">
             <div className="min-w-0 flex-1">
-              <p className="flex min-w-0 items-center gap-2 text-sm text-ink">
+              <p className="flex min-w-0 items-center gap-2 text-[15px] font-medium text-ink">
                 <span className="truncate">{rule.description}</span>
                 {!rule.active && <Badge>pausada</Badge>}
               </p>
-              <p className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-ink-3">
+              <p className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] text-ink-3">
                 {/* No celular o valor desce para esta linha; no desktop fica em coluna própria. */}
                 <span className={`${valueClass} sm:hidden`}>{formatSigned(rule.value, rule.type)}</span>
                 <span>todo dia {rule.dayOfMonth} · {categoriesById.get(rule.categoryId)?.name ?? 'Sem categoria'}</span>
