@@ -2,7 +2,7 @@ import DatePill from './DatePill';
 
 export default function PageHeader({ eyebrow = 'Finanças pessoais', title, subtitle, actions }) {
   return (
-    <header className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+    <header className="flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between">
       <div>
         <p className="eyebrow">{eyebrow}</p>
         <h1 className="mt-2 font-serif text-[34px] leading-none text-ink md:text-[44px]">{title}</h1>

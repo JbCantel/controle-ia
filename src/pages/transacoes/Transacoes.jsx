@@ -23,11 +23,18 @@ import { formatBRL } from '../../domain/money';
 
 const TYPE_FILTERS = [{ value: 'todas', label: 'Todas' }, { value: 'receita', label: 'Receitas' }, { value: 'despesa', label: 'Despesas' }];
 
-function Total({ label, cents, tone }) {
+// Um cartão só: 3 colunas quando o espaço permite, linhas compactas quando estreito (celular, tablet com menu).
+function Totals({ items }) {
   return (
-    <Card className="rounded-kpi p-4">
-      <p className="text-[13px] text-ink-2">{label}</p>
-      <p className={`mt-1 text-xl font-semibold tabular-nums ${tone}`}>{formatBRL(cents)}</p>
+    <Card className="@container mt-8 rounded-kpi">
+      <dl className="grid divide-y divide-line @xl:grid-cols-3 @xl:divide-x @xl:divide-y-0">
+        {items.map(({ label, cents, tone }) => (
+          <div key={label} className="flex items-baseline justify-between gap-3 px-4 py-3 @xl:block @xl:py-4">
+            <dt className="text-[13px] text-ink-2">{label}</dt>
+            <dd className={`whitespace-nowrap text-lg font-semibold tabular-nums @xl:mt-1 @xl:text-xl ${tone}`}>{formatBRL(cents)}</dd>
+          </div>
+        ))}
+      </dl>
     </Card>
   );
 }
@@ -74,11 +81,13 @@ export default function Transacoes() {
         )}
       />
 
-      <div className="mt-8 grid gap-3 sm:grid-cols-3">
-        <Total label="Entradas" cents={totals.incomeCents} tone="text-brand" />
-        <Total label="Saídas" cents={totals.expenseCents} tone="text-expense" />
-        <Total label="Saldo" cents={totals.balanceCents} tone={totals.balanceCents < 0 ? 'text-expense' : 'text-ink'} />
-      </div>
+      <Totals
+        items={[
+          { label: 'Entradas', cents: totals.incomeCents, tone: 'text-brand' },
+          { label: 'Saídas', cents: totals.expenseCents, tone: 'text-expense' },
+          { label: 'Saldo', cents: totals.balanceCents, tone: totals.balanceCents < 0 ? 'text-expense' : 'text-ink' },
+        ]}
+      />
 
       <Card className="mt-4 p-4 sm:p-5">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center">

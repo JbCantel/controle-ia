@@ -28,13 +28,14 @@ export default function Painel() {
             <Button variant="primary" onClick={() => setImportOpen(true)}><Upload size={16} aria-hidden />Importar backup</Button>
             <Button onClick={() => startFresh()}>Começar do zero</Button>
           </div>
-          <DataModal open={importOpen} mode="import" onClose={() => setImportOpen(false)} />
         </Card>
       ) : (
         <Card className="mt-8 min-h-[240px]">
           {counts && <EmptyState icon={LayoutGrid} title="Painel em construção" text="Os indicadores e gráficos chegam na etapa 7. Suas transações já estão na aba Transações." />}
         </Card>
       )}
+      {/* Fora do cartão: a importação preenche o banco e o cartão some, mas o modal precisa continuar aberto. */}
+      <DataModal open={importOpen} mode="import" onClose={() => setImportOpen(false)} />
     </>
   );
 }

@@ -12,7 +12,8 @@ export default function BottomNav() {
           className={({ isActive }) => `flex min-h-14 min-w-0 flex-col items-center justify-center gap-1 px-0.5 text-[10px] transition-colors duration-150 ${isActive ? 'text-brand' : 'text-ink-2 hover:text-ink'}`}
         >
           <Icon size={20} strokeWidth={1.75} aria-hidden />
-          <span className="max-w-full truncate">{label}</span>
+          {/* Abaixo de 360px os rótulos não cabem: só ícones, nome segue para leitores de tela. */}
+          <span className="max-w-full truncate max-[359px]:sr-only">{label}</span>
         </NavLink>
       ))}
     </nav>
