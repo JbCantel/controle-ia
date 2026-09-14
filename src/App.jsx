@@ -6,7 +6,7 @@ import MobileTopBar from './components/layout/MobileTopBar';
 import EmBreve from './pages/EmBreve';
 import { runDueRecurrences } from './db/recurrences';
 
-const Painel = lazy(() => import('./pages/Painel'));
+const Painel = lazy(() => import('./pages/painel/Painel'));
 const Transacoes = lazy(() => import('./pages/transacoes/Transacoes'));
 
 export default function App() {
