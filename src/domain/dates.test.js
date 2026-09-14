@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { formatDateBR, monthKey, addMonths, addDays, weekdayOf, lastNMonths, monthLabel, monthShort, daysInMonth, currentMonthKey } from './dates';
+import { formatDateBR, monthKey, addMonths, addDays, weekdayOf, lastNMonths, monthLabel, monthShort, daysInMonth, currentMonthKey, monthsEndingAt, monthRange, weekdayKey, formatDayHeader, formatLongDate } from './dates';
 
 describe('dates', () => {
   it('formata ISO em dd/mm/aaaa', () => {
@@ -37,5 +37,20 @@ describe('dates', () => {
   it('dias no mês', () => {
     expect(daysInMonth('2026-02')).toBe(28);
     expect(daysInMonth('2026-06')).toBe(30);
+  });
+  it('meses terminando num mês dado', () => {
+    expect(monthsEndingAt('2026-02', 3)).toEqual(['2025-12', '2026-01', '2026-02']);
+  });
+  it('intervalo de datas do mês', () => {
+    expect(monthRange('2026-02')).toEqual({ start: '2026-02-01', end: '2026-02-28' });
+  });
+  it('chave do dia da semana', () => {
+    expect(weekdayKey('2026-09-14')).toBe('seg');
+    expect(weekdayKey('2026-09-19')).toBe('sab');
+    expect(weekdayKey('2026-09-20')).toBe('dom');
+  });
+  it('cabeçalho de dia e data longa', () => {
+    expect(formatDayHeader('2026-09-14')).toBe('seg, 14 de set.');
+    expect(formatLongDate('2026-09-14')).toBe('14 de set. de 2026');
   });
 });

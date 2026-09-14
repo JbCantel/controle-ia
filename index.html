@@ -3,14 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Controle Pessoal — Finanças e Hábitos</title>
-    <script>
-      (function () {
-        var saved = localStorage.getItem('theme');
-        var dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
-        document.documentElement.classList.toggle('dark', dark);
-      })();
-    </script>
+    <meta name="theme-color" content="#080B0A" />
+    <title>ORBE — Finanças pessoais</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Fundo da primeira pintura, antes do CSS carregar (evita flash branco) -->
+    <style>html { background: #080B0A; color-scheme: dark; }</style>
   </head>
   <body>
     <div id="root"></div>

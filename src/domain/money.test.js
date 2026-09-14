@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { formatBRL, parseBRL, centsToBRLInput } from './money';
+import { formatBRL, parseBRL, centsToBRLInput, toCents, fromCents, sumCents, formatReais, formatSigned, formatMoneyInput } from './money';
 
 describe('formatBRL', () => {
   it('formata centavos em R$ com vírgula e milhar', () => {
@@ -43,5 +43,28 @@ describe('centsToBRLInput', () => {
   });
   it('roundtrip com parseBRL', () => {
     expect(parseBRL(centsToBRLInput(123456))).toBe(123456);
+  });
+});
+
+describe('reais <-> centavos', () => {
+  it('converte reais para centavos sem erro de ponto flutuante', () => {
+    expect(toCents(386.42)).toBe(38642);
+    expect(toCents(0.1 + 0.2)).toBe(30);
+    expect(fromCents(38642)).toBe(386.42);
+  });
+  it('soma valores em reais via centavos', () => {
+    expect(sumCents([0.1, 0.2])).toBe(30);
+    expect(sumCents([])).toBe(0);
+  });
+  it('formata reais', () => {
+    expect(formatReais(2106.32)).toBe('R$ 2.106,32');
+  });
+  it('formata com sinal por tipo', () => {
+    expect(formatSigned(850, 'receita')).toBe('+ R$ 850,00');
+    expect(formatSigned(89.9, 'despesa')).toBe('- R$ 89,90');
+  });
+  it('formata o texto da máscara de valor', () => {
+    expect(formatMoneyInput(123456)).toBe('1.234,56');
+    expect(formatMoneyInput(5)).toBe('0,05');
   });
 });
