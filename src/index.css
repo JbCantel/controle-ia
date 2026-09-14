@@ -1,1 +1,50 @@
 @import "tailwindcss";
+
+/* Tokens do ORBE. Nenhuma cor literal fora deste bloco (exceto cores de categoria, que são dados). */
+@theme {
+  --color-*: initial;
+  --color-bg: #080B0A;
+  --color-surface: #0F1513;
+  --color-line: rgb(255 255 255 / 0.07);
+  --color-brand: #45C98A;
+  --color-brand-soft: #12241C;
+  --color-brand-line: #1E4634;
+  --color-ink: #E9EFEB;
+  --color-ink-2: #7E8C87;
+  --color-ink-3: #74817C;
+  --color-deco: #5A6662;
+  --color-expense: #E06B5A;
+  --color-income: #4CC3B5;
+  --color-amber: #E8B04B;
+  --color-chart-purple: #A78BFA;
+  --color-chart-orange: #F0A44C;
+  --color-chart-cyan: #6FCFD8;
+  --color-chart-pink: #F0728F;
+  --color-sleep: #8CB8FF;
+
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 16px;
+  --radius-kpi: 14px;
+}
+
+@layer base {
+  html { color-scheme: dark; }
+  body { @apply bg-bg font-sans text-ink antialiased; }
+  :focus-visible { outline: 2px solid var(--color-brand); outline-offset: 2px; }
+  ::selection { background: var(--color-brand-line); }
+}
+
+/* Etiqueta em caixa alta: SÓ no cabeçalho de página e no cartão de armazenamento. */
+@utility eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-brand);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0s !important; animation-duration: 0s !important; }
+}
