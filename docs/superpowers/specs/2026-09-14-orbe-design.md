@@ -368,3 +368,63 @@ Duas famílias, empacotadas via `@fontsource`, só o subconjunto latin, `font-di
 - **Checkpoints com o usuário:** depois das etapas 2, 6 e 8. Em cada um, informar o que testar e aguardar retorno.
 - **Merge na `master`** depois do checkpoint 3 aprovado.
 - **Primeira abertura no Chrome real** só depois do ensaio de reconexão passar.
+
+## 12. Revisão após o checkpoint 1 (14/09/2026)
+
+Retorno do usuário sobre as etapas 1–2: "o visual ainda não está legal". Pontos marcados: **tudo muito apagado**, **fonte dos títulos**, **tamanho e respiro**, **falta o Painel da foto**. Esta seção **substitui** os trechos correspondentes do §8 e do §11.
+
+### 12.1 Ordem das etapas
+
+1. ~~Tokens, moldura, banco, backup~~ (feito)
+2. ~~Transações + recorrências~~ (feito)
+3. **Revisão visual + Painel** → **checkpoint 2** (visual do Painel comparado à foto)
+4. Categorias
+5. Orçamento
+6. Metas
+7. Hábitos → **checkpoint 3**
+8. Otimização, ponta a ponta, README → **checkpoint 4** e merge
+
+### 12.2 Tokens revisados (substituem a tabela do §8.1)
+
+| Token | Antes | Agora | Motivo |
+|---|---|---|---|
+| `bg` | `#080B0A` | `#070A09` | mais contraste com os cartões |
+| `surface` | `#0F1513` | `#121A17` | cartão visível sobre o fundo |
+| `surface-2` | — | `#18221E` | novo: hover de linhas, trilho de barras, campos |
+| `line` | 7% branco | `rgb(255 255 255 / 0.10)` | borda perceptível |
+| `brand` | `#45C98A` | `#4FD69A` | verde mais vivo |
+| `brand-soft` | `#12241C` | `#143324` | item ativo destacado |
+| `brand-line` | `#1E4634` | `#2B6C4D` | borda do ativo visível |
+| `ink` | `#E9EFEB` | `#F1F5F3` | texto principal |
+| `ink-2` | `#7E8C87` | `#A6B3AE` | secundário legível |
+| `ink-3` | `#74817C` | `#8B9994` | legendas (≥ 5,5:1 sobre `surface`) |
+| `deco` | `#5A6662` | `#4A5652` | só não textual |
+| `expense` | `#E06B5A` | `#F07C69` | vermelho legível no escuro |
+| `income` | `#4CC3B5` | `#5BD3C4` | |
+| `amber` | `#E8B04B` | `#F2BF59` | |
+
+Cores de gráfico, sono e paleta de categorias ficam como estão.
+
+### 12.3 Tipografia e tamanhos revisados (substituem o §8.2)
+
+- **Serif: Fraunces** (variável, `@fontsource-variable/fraunces`), no lugar da Instrument Serif. Uso:
+  - título da página: peso 600, 40px no celular / 52px no desktop, `letter-spacing: -0.02em`;
+  - títulos de cartão: peso 600, 20px.
+- **Inter** continua no resto, com tamanhos maiores:
+  - valor de indicador: 30px, peso 700;
+  - texto base: 15px;
+  - rótulos: 14px;
+  - legendas: 13px;
+  - etiqueta: 11px.
+- **Respiro:**
+  - padding de cartão: 24px (`p-6`), 20px no celular;
+  - espaço entre blocos: 20px;
+  - cabeçalho → conteúdo: 40px.
+
+### 12.4 Detalhes da foto aplicados ao Painel (substituem trechos do §7.2)
+
+- A legenda da rosca fica **abaixo** do gráfico, em linha que quebra, e não em coluna ao lado.
+- Cada linha de "Movimentações recentes" tem uma **barra vertical de 3px na cor da categoria** à esquerda. A segunda linha mostra "Categoria · dd/mm/aaaa".
+- Os indicadores têm emblema de 36px, rótulo, valor grande e legenda, com altura igual nos 4.
+- Os títulos dos cartões de gráfico usam a serif, com subtítulo em `ink-3`.
+- O gráfico de linha ocupa 260px de altura no desktop e 200px no celular.
