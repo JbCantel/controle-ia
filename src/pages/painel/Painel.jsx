@@ -12,6 +12,7 @@ import BalanceChart from './BalanceChart';
 import CategoryDonut from './CategoryDonut';
 import RecentList from './RecentList';
 import WelcomeCard from './WelcomeCard';
+import DashboardSkeleton from './DashboardSkeleton';
 import { useMonthParam } from '../../hooks/useMonthParam';
 import { db } from '../../db/db';
 import { cumulativeBalance, expensesByCategory, monthSummary, plural, recentTransactions, savingsSummary } from '../../domain/dashboard';
@@ -49,7 +50,7 @@ export default function Painel() {
       <PageHeader title="Visão geral" subtitle="Seu dinheiro, com contexto." actions={<MonthSwitcher month={month} onChange={setMonth} />} />
 
       {!view ? (
-        <div className="mt-10 min-h-[640px]" aria-busy="true" />
+        <DashboardSkeleton />
       ) : isEmpty ? (
         <WelcomeCard onImport={() => setImportOpen(true)} />
       ) : (

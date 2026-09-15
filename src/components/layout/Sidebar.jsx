@@ -6,7 +6,7 @@ import StorageCard from './StorageCard';
 
 export default function Sidebar() {
   return (
-    <aside className="sticky top-0 hidden h-dvh w-[248px] shrink-0 flex-col border-r border-line px-4 py-6 md:flex">
+    <aside className="sticky top-0 hidden h-dvh w-[248px] shrink-0 flex-col border-r border-line bg-surface/20 px-4 py-6 md:flex">
       <div className="px-1"><Brand /></div>
       <nav aria-label="Principal" className="mt-8 flex flex-col gap-1">
         {NAV.map(({ to, label, icon: Icon }) => (
@@ -14,7 +14,7 @@ export default function Sidebar() {
             key={to}
             to={to}
             end={to === '/'}
-            className={({ isActive }) => `flex h-12 items-center gap-3 rounded-xl border px-3.5 text-[15px] font-medium transition-colors duration-150 ${isActive ? 'border-brand-line bg-brand-soft text-ink' : 'border-transparent text-ink-2 hover:bg-line hover:text-ink'}`}
+            className={({ isActive }) => `flex h-12 items-center gap-3 rounded-xl border px-3.5 text-[15px] font-medium transition-colors duration-150 ${isActive ? 'border-brand-line bg-brand-soft text-ink' : 'border-transparent text-ink-2 hover:border-line hover:bg-surface/60 hover:text-ink'}`}
           >
             {({ isActive }) => (
               <>

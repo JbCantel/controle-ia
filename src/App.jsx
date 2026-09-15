@@ -24,10 +24,10 @@ export default function App() {
             <Routes>
               <Route path="/" element={<Painel />} />
               <Route path="/transacoes" element={<Transacoes />} />
-              <Route path="/orcamento" element={<EmBreve title="Orçamento" etapa={4} />} />
-              <Route path="/metas" element={<EmBreve title="Metas" etapa={5} />} />
-              <Route path="/categorias" element={<EmBreve title="Categorias" etapa={3} />} />
-              <Route path="/habitos" element={<EmBreve eyebrow="Rotina" title="Rotina" etapa={6} />} />
+              <Route path="/orcamento" element={<EmBreve title="Orçamento" etapa={5} />} />
+              <Route path="/metas" element={<EmBreve title="Metas" etapa={6} />} />
+              <Route path="/categorias" element={<EmBreve title="Categorias" etapa={4} />} />
+              <Route path="/habitos" element={<EmBreve eyebrow="Rotina" title="Rotina" etapa={7} />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </Suspense>
