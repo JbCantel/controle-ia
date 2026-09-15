@@ -53,7 +53,7 @@ export default function Modal({ open, title, onClose, children, size = 'md' }) {
         className={`max-h-[90dvh] w-full overflow-y-auto rounded-t-card border border-line bg-surface p-6 sm:rounded-card ${size === 'lg' ? 'sm:max-w-lg' : 'sm:max-w-md'}`}
       >
         <div className="mb-4 flex items-center justify-between gap-3">
-          <h2 id={titleId} className="font-serif text-2xl font-semibold tracking-[-0.01em] text-ink">{title}</h2>
+          <h2 id={titleId} className="font-display text-2xl font-semibold tracking-[-0.025em] text-ink">{title}</h2>
           <IconButton label="Fechar" onClick={onClose}><X size={18} aria-hidden /></IconButton>
         </div>
         {children}

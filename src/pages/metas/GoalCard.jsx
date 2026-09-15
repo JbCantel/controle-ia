@@ -35,7 +35,7 @@ export default function GoalCard({ item, onEdit, onDelete, onContribution, onDel
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2">
-            <h2 className="font-serif text-2xl font-semibold tracking-[-0.01em] text-ink">{goal.name}</h2>
+            <h2 className="font-display text-2xl font-semibold tracking-[-0.025em] text-ink">{goal.name}</h2>
             {progress.completed && <Badge className="border-brand-line bg-brand-soft text-brand"><CheckCircle2 size={12} aria-hidden />Concluída</Badge>}
             {!progress.completed && goal.deadline && forecast.state === 'estimada' && (
               <Badge className={forecast.onTime ? 'text-brand' : 'text-amber'}>{forecast.onTime ? 'No prazo' : 'Fora do prazo'}</Badge>

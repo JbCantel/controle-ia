@@ -1,5 +1,5 @@
 const VARIANTS = {
-  primary: 'bg-brand font-semibold text-bg hover:bg-brand/90',
+  primary: 'bg-brand font-semibold text-bg shadow-neon hover:bg-brand/90 hover:shadow-neon-strong',
   secondary: 'border border-line text-ink hover:bg-line',
   danger: 'bg-expense font-semibold text-bg hover:bg-expense/90',
   ghost: 'text-ink-2 hover:bg-line hover:text-ink',
@@ -10,7 +10,7 @@ export default function Button({ variant = 'secondary', size = 'md', className =
   return (
     <button
       type={type}
-      className={`inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full transition-colors duration-150 disabled:pointer-events-none disabled:opacity-50 ${sizing} ${VARIANTS[variant]} ${className}`}
+      className={`inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full transition-[background-color,color,border-color,box-shadow] duration-150 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ${sizing} ${VARIANTS[variant]} ${className}`}
       {...props}
     />
   );

@@ -86,7 +86,7 @@ export default function Hoje({ habits, checks, date, onDateChange, onOpenWeek })
 
       <Card className="h-fit p-5 sm:p-6">
         <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-soft text-brand ring-1 ring-brand-line"><Clock3 size={19} aria-hidden /></span>
-        <h2 className="mt-4 font-serif text-xl font-semibold text-ink">Ritmo do dia</h2>
+        <h2 className="mt-4 font-display text-xl font-semibold tracking-[-0.025em] text-ink">Ritmo do dia</h2>
         <p className="mt-2 text-sm leading-relaxed text-ink-2">
           {progress === null
             ? 'Este dia não tem blocos ativos para acompanhar.'

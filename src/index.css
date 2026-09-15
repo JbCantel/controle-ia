@@ -3,28 +3,31 @@
 /* Tokens do ORBE. Nenhuma cor literal fora deste bloco (exceto cores de categoria, que são dados). */
 @theme {
   --color-*: initial;
-  --color-bg: #070A09;
-  --color-surface: #121A17;
-  --color-surface-2: #18221E;
-  --color-line: rgb(255 255 255 / 0.10);
-  --color-brand: #4FD69A;
-  --color-brand-soft: #143324;
-  --color-brand-line: #2B6C4D;
-  --color-ink: #F1F5F3;
-  --color-ink-2: #A6B3AE;
-  --color-ink-3: #8B9994;
-  --color-deco: #4A5652;
-  --color-expense: #F07C69;
-  --color-income: #5BD3C4;
-  --color-amber: #F2BF59;
-  --color-chart-purple: #A78BFA;
-  --color-chart-orange: #F0A44C;
-  --color-chart-cyan: #6FCFD8;
-  --color-chart-pink: #F0728F;
-  --color-sleep: #8CB8FF;
+  --color-bg: oklch(0.105 0.025 264);
+  --color-surface: oklch(0.155 0.032 264);
+  --color-surface-2: oklch(0.195 0.04 263);
+  --color-line: oklch(0.31 0.045 262);
+  --color-brand: oklch(0.72 0.19 252);
+  --color-brand-soft: oklch(0.22 0.07 258);
+  --color-brand-line: oklch(0.46 0.14 255);
+  --color-ink: oklch(0.96 0.012 255);
+  --color-ink-2: oklch(0.78 0.028 258);
+  --color-ink-3: oklch(0.67 0.03 258);
+  --color-deco: oklch(0.48 0.04 258);
+  --color-expense: oklch(0.72 0.17 25);
+  --color-income: oklch(0.77 0.14 205);
+  --color-amber: oklch(0.81 0.14 80);
+  --color-chart-purple: oklch(0.73 0.16 292);
+  --color-chart-orange: oklch(0.76 0.15 55);
+  --color-chart-cyan: oklch(0.79 0.12 210);
+  --color-chart-pink: oklch(0.73 0.16 350);
+  --color-sleep: oklch(0.73 0.14 275);
 
-  --font-serif: "Fraunces Variable", ui-serif, Georgia, serif;
-  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Space Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-neon: 0 0 20px oklch(0.72 0.19 252 / 0.22);
+  --shadow-neon-strong: 0 0 28px oklch(0.72 0.19 252 / 0.3);
 
   --radius-card: 16px;
   --radius-kpi: 14px;
@@ -32,7 +35,13 @@
 
 @layer base {
   html { color-scheme: dark; }
-  body { @apply min-h-dvh bg-bg font-sans text-[15px] text-ink antialiased; }
+  body {
+    @apply min-h-dvh bg-bg font-sans text-base text-ink antialiased;
+    background-image: radial-gradient(circle at 82% -8%, oklch(0.52 0.18 258 / 0.16), transparent 34rem);
+    background-attachment: fixed;
+    font-optical-sizing: auto;
+    font-kerning: normal;
+  }
   h1, h2, h3 { text-wrap: balance; }
   button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
   :focus-visible { outline: 2px solid var(--color-brand); outline-offset: 2px; }
