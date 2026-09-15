@@ -29,7 +29,7 @@ Calma, precisa e humana. O ORBE deve transmitir domínio e segurança sem parece
 2. Confiança local e explícita: comunicar com clareza que os dados ficam no navegador, sem tornar a infraestrutura o foco da experiência.
 3. Hierarquia para leitura rápida: valores, tendências, estados e ações precisam ser reconhecidos em poucos segundos.
 4. Familiaridade consistente: controles, formulários, listas e feedbacks devem repetir o mesmo vocabulário em todas as telas.
-5. Personalidade com contenção: azul profundo, Space Grotesk e superfícies azul-marinho dão identidade; o acento destaca ações e estados sem competir com os dados e tarefas.
+5. Personalidade com contenção: verde, Space Grotesk e superfícies escuras dão identidade; o acento destaca ações e estados sem competir com os dados e tarefas.
 
 ## Accessibility & Inclusion
 
