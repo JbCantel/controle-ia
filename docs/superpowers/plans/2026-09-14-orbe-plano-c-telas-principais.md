@@ -211,6 +211,8 @@ A spec não define se blocos de um mesmo dia podem se sobrepor. Antes da impleme
 
 Até essa decisão, Etapas 4–6 podem avançar normalmente.
 
+**Decisão adotada em 2026-09-15:** permitir sobreposição, conforme a recomendação apresentada no checkpoint e a instrução subsequente para continuar a criação. A ordenação permanece determinística por horário, `order` e ID.
+
 ### Tarefa 7.1 — Datas e domínio por TDD
 
 **Arquivos:**
