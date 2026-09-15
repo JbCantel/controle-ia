@@ -3,17 +3,17 @@
 /* Tokens do ORBE. Nenhuma cor literal fora deste bloco (exceto cores de categoria, que são dados). */
 @theme {
   --color-*: initial;
-  --color-bg: oklch(0.105 0.025 264);
-  --color-surface: oklch(0.155 0.032 264);
-  --color-surface-2: oklch(0.195 0.04 263);
-  --color-line: oklch(0.31 0.045 262);
-  --color-brand: oklch(0.72 0.19 252);
-  --color-brand-soft: oklch(0.22 0.07 258);
-  --color-brand-line: oklch(0.46 0.14 255);
-  --color-ink: oklch(0.96 0.012 255);
-  --color-ink-2: oklch(0.78 0.028 258);
-  --color-ink-3: oklch(0.67 0.03 258);
-  --color-deco: oklch(0.48 0.04 258);
+  --color-bg: oklch(0.105 0.018 264);
+  --color-surface: oklch(0.15 0.023 264);
+  --color-surface-2: oklch(0.185 0.028 263);
+  --color-line: oklch(0.275 0.03 262);
+  --color-brand: oklch(0.67 0.13 255);
+  --color-brand-soft: oklch(0.205 0.042 258);
+  --color-brand-line: oklch(0.4 0.08 257);
+  --color-ink: oklch(0.935 0.01 255);
+  --color-ink-2: oklch(0.75 0.022 258);
+  --color-ink-3: oklch(0.64 0.024 258);
+  --color-deco: oklch(0.43 0.03 258);
   --color-expense: oklch(0.72 0.17 25);
   --color-income: oklch(0.77 0.14 205);
   --color-amber: oklch(0.81 0.14 80);
@@ -26,8 +26,7 @@
   --font-display: "Space Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Space Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
 
-  --shadow-neon: 0 0 20px oklch(0.72 0.19 252 / 0.22);
-  --shadow-neon-strong: 0 0 28px oklch(0.72 0.19 252 / 0.3);
+  --shadow-accent: 0 2px 8px oklch(0.5 0.1 255 / 0.18);
 
   --radius-card: 16px;
   --radius-kpi: 14px;
@@ -37,8 +36,6 @@
   html { color-scheme: dark; }
   body {
     @apply min-h-dvh bg-bg font-sans text-base text-ink antialiased;
-    background-image: radial-gradient(circle at 82% -8%, oklch(0.52 0.18 258 / 0.16), transparent 34rem);
-    background-attachment: fixed;
     font-optical-sizing: auto;
     font-kerning: normal;
   }

@@ -1,5 +1,5 @@
 const VARIANTS = {
-  primary: 'bg-brand font-semibold text-bg shadow-neon hover:bg-brand/90 hover:shadow-neon-strong',
+  primary: 'bg-brand font-semibold text-bg shadow-accent hover:bg-brand/90',
   secondary: 'border border-line text-ink hover:bg-line',
   danger: 'bg-expense font-semibold text-bg hover:bg-expense/90',
   ghost: 'text-ink-2 hover:bg-line hover:text-ink',
