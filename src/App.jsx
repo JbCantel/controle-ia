@@ -3,7 +3,6 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import Sidebar from './components/layout/Sidebar';
 import BottomNav from './components/layout/BottomNav';
 import MobileTopBar from './components/layout/MobileTopBar';
-import EmBreve from './pages/EmBreve';
 import { runDueRecurrences } from './db/recurrences';
 
 const Painel = lazy(() => import('./pages/painel/Painel'));
@@ -11,6 +10,7 @@ const Transacoes = lazy(() => import('./pages/transacoes/Transacoes'));
 const Categorias = lazy(() => import('./pages/categorias/Categorias'));
 const Orcamento = lazy(() => import('./pages/orcamento/Orcamento'));
 const Metas = lazy(() => import('./pages/metas/Metas'));
+const Habitos = lazy(() => import('./pages/habitos/Habitos'));
 
 export default function App() {
   useEffect(() => {
@@ -30,7 +30,7 @@ export default function App() {
               <Route path="/orcamento" element={<Orcamento />} />
               <Route path="/metas" element={<Metas />} />
               <Route path="/categorias" element={<Categorias />} />
-              <Route path="/habitos" element={<EmBreve eyebrow="Rotina" title="Rotina" etapa={7} />} />
+              <Route path="/habitos" element={<Habitos />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </Suspense>
