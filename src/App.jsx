@@ -10,6 +10,7 @@ const Painel = lazy(() => import('./pages/painel/Painel'));
 const Transacoes = lazy(() => import('./pages/transacoes/Transacoes'));
 const Categorias = lazy(() => import('./pages/categorias/Categorias'));
 const Orcamento = lazy(() => import('./pages/orcamento/Orcamento'));
+const Metas = lazy(() => import('./pages/metas/Metas'));
 
 export default function App() {
   useEffect(() => {
@@ -27,7 +28,7 @@ export default function App() {
               <Route path="/" element={<Painel />} />
               <Route path="/transacoes" element={<Transacoes />} />
               <Route path="/orcamento" element={<Orcamento />} />
-              <Route path="/metas" element={<EmBreve title="Metas" etapa={6} />} />
+              <Route path="/metas" element={<Metas />} />
               <Route path="/categorias" element={<Categorias />} />
               <Route path="/habitos" element={<EmBreve eyebrow="Rotina" title="Rotina" etapa={7} />} />
               <Route path="*" element={<Navigate to="/" replace />} />
