@@ -9,6 +9,7 @@ import { runDueRecurrences } from './db/recurrences';
 const Painel = lazy(() => import('./pages/painel/Painel'));
 const Transacoes = lazy(() => import('./pages/transacoes/Transacoes'));
 const Categorias = lazy(() => import('./pages/categorias/Categorias'));
+const Orcamento = lazy(() => import('./pages/orcamento/Orcamento'));
 
 export default function App() {
   useEffect(() => {
@@ -25,7 +26,7 @@ export default function App() {
             <Routes>
               <Route path="/" element={<Painel />} />
               <Route path="/transacoes" element={<Transacoes />} />
-              <Route path="/orcamento" element={<EmBreve title="Orçamento" etapa={5} />} />
+              <Route path="/orcamento" element={<Orcamento />} />
               <Route path="/metas" element={<EmBreve title="Metas" etapa={6} />} />
               <Route path="/categorias" element={<Categorias />} />
               <Route path="/habitos" element={<EmBreve eyebrow="Rotina" title="Rotina" etapa={7} />} />
